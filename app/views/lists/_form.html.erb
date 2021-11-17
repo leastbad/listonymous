@@ -1,0 +1,44 @@
+<%= form_with(model: @list) do |form| %>
+  <% if @list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+
+      <ul>
+        <% @list.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= @list.inspect() %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+
+  <%= form.select :category_ids, Category.all.collect{ |c| [c.title, c.id] } %>
+  <%#= Category.all.collect{ |c| [c.title, c.id] } %>
+
+  <%#= form.collection_check_boxes(:category_ids, Category.all, :id, :to_s) %>
+
+    <%#= form.label :categories_id %>
+    <%#= form.text_field :categories_id %>
+    <!-- 
+    <% @list.categories do |category| %>
+      <%= form.fields_for category do |category_form| %>
+        <%#= contact_detail_form.text_field :phone_number %>
+        <div class="field">
+          <%= category_form.label :title, "Category name" %>
+          <%= category_form.text_field :title %>
+        </div>
+      <% end %>
+    <% end %> 
+    -->
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

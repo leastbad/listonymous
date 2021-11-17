@@ -1,0 +1,7 @@
+StimulusReflex, RSpec
+rails new my_app -d postgresql --skip-test --template https://www.railsbytes.com/script/VqqsAD
+
+rails g migration CreateCategoriesListsJoinTable categories lists
+
+https://stackoverflow.com/questions/10301794/difference-between-rake-dbmigrate-dbreset-and-dbschemaload
+
