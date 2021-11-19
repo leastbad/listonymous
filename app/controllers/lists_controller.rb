@@ -1,11 +1,14 @@
+require 'digest/sha1'
+
 class ListsController < ApplicationController
   before_action :set_list, only: %i[ show edit update destroy ]
 
   # GET /lists or /lists.json
   def index
-    @lists = List.all.order(created_at: :desc)
+    # @lists = List.all.order(created_at: :desc)
+    @lists = List.search(params[:search]).order(created_at: :desc)
     @list = List.new
-    @category = Category.new
+    # @category = Category.new
     # 1.times { @list.categories.build }
   end
 
@@ -56,6 +59,19 @@ class ListsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to lists_url, notice: "List was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def create_copy_text
+    list = List.find(params[:id])
+    # byebug
+    result = []
+    list.text_messages.each do |text_message|
+      result << text_message.content
+    end
+    result = result.join(', ')
+    respond_to do |format|
+      format.json { render json: { data: result }.to_json }
     end
   end
 

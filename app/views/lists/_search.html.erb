@@ -1,0 +1,22 @@
+<h1> Search </h1>
+
+<%= form_with url: lists_path do |f| %>
+    <%= f.text_field :search, value: params[:search], autocomplete: "off", data: { reflex: "input->ListSearch#search"} %>
+    <%#= f.submit "Search" %>
+    <% if params[:search].present? %>
+        <a href="#" data-action="click->ListSearch#reset">Clear search</a>
+    <% end %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Categories</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <%#= render "category_form" %>
+  <%= render "search_results", lists: @lists %>
+
+</table>

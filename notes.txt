@@ -5,3 +5,10 @@ rails g migration CreateCategoriesListsJoinTable categories lists
 
 https://stackoverflow.com/questions/10301794/difference-between-rake-dbmigrate-dbreset-and-dbschemaload
 
+https://jademind.com/blog/posts/action-cable-specific-page-within-ruby-rails/
+
+http://railsapps.github.io/rails-javascript-include-external.html
+
+https://medium.com/@yassimortensen/simple-search-form-in-rails-8483739e4042
+
+https://www.colby.so/posts/live-search-with-rails-and-stimulusreflex

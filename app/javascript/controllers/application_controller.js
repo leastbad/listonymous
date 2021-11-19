@@ -17,6 +17,35 @@ export default class extends Controller {
     StimulusReflex.register(this)
   }
 
+  search() {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      this.stimulate("ListSearch#search");
+    }, 200);
+  }
+
+  beforeSearch() {
+    this.listsList.animate(
+      this.fadeIn,
+      this.fadeInTiming
+    )
+  }
+  
+  get fadeIn() {
+    return [
+      { opacity: 0 },
+      { opacity: 1 }
+    ]
+  }
+  
+  get fadeInTiming() {
+    return { duration: 300 }
+  }
+  
+  get listsList() {
+    return document.getElementById('list-search-results')
+  }
+
   /* Application-wide lifecycle methods
    *
    * Use these methods to handle lifecycle concerns for the entire application.

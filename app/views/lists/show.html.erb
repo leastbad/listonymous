@@ -1,4 +1,12 @@
+<% content_for :channels do %>
+  <%= javascript_pack_tag 'channels', 'data-turbolinks-track': 'reload' %>
+  <%#= javascript_include_tag 'channels/index' %>
+  <%#= javascript_include_tag 'channels/consumer' %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
+
+<%= link_to 'Back', lists_path %>
 
 <p>
   <strong>Title:</strong>
@@ -12,11 +20,12 @@
 
 <%= render partial: "text_message_form", locals: { message: @list.text_messages.build, list_id: @list.id } %>
 
-<p>
-  <% @list.text_messages.each do |text_message| %>
-    <p><%= text_message.content %></p>
+<%= button_to 'Copy text', create_copy_text_list_path(@list), method: :get, remote: true %>
+
+<div id="messages">
+  <% @list.text_messages.order(created_at: :desc).each do |text_message| %>
+    <%= render partial: "text_messages/message", locals: {message: text_message} %>
   <% end %>
-</p>
+</div>
 
 <%#= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>

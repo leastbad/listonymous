@@ -1,0 +1,16 @@
+<tbody id="list-search-results">
+    <% lists.each do |list| %>
+      <tr>
+        <td><%= list.title %></td>
+        <td>
+          <% list.categories %>
+          <% list.category_ids.each do |c| %>
+            <%= Category.find(c).title %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', list %></td>
+        <td><%#= link_to 'Edit', edit_list_path(list) %></td>
+        <td><%#= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+</tbody>
