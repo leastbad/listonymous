@@ -8,6 +8,8 @@
 
 <%= link_to 'Back', lists_path %>
 
+<p> Number of viewers <%= @num_viewers %> </p>
+
 <p>
   <strong>Title:</strong>
   <%= @list.title %>
@@ -27,5 +29,7 @@
     <%= render partial: "text_messages/message", locals: {message: text_message} %>
   <% end %>
 </div>
+
+<a href='#' data-reflex="click->List#viewer_count">Update viewers</a>
 
 <%#= link_to 'Edit', edit_list_path(@list) %> |

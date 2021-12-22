@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ListSearchReflex < ApplicationReflex
+class ListReflex < ApplicationReflex
   # Add Reflex methods in this file.
   #
   # All Reflex instances include CableReady::Broadcaster and expose the following properties:
@@ -20,6 +20,10 @@ class ListSearchReflex < ApplicationReflex
   #
   # Example:
   #
+  #   before_reflex do
+  #     # throw :abort # this will prevent the Reflex from continuing
+  #     # learn more about callbacks at https://docs.stimulusreflex.com/lifecycle
+  #   end
   #
   #   def example(argument=true)
   #     # Your logic here...
@@ -27,17 +31,5 @@ class ListSearchReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com/reflexes#reflex-classes
-
-  def search
-    lists = List.search(params[:search])
-    morph "#list-search-results", render(partial: 'search/search_results', locals: { lists: lists })
-  end
-
-  private
-
-  def list_params
-    # params.require(:list).permit(:title, :categories_id)
-    params.require(:list).permit(:title, :category_ids)
-  end
 
 end

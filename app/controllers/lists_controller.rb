@@ -1,25 +1,26 @@
 require 'digest/sha1'
 
 class ListsController < ApplicationController
+  include CableReady::Broadcaster
+
   before_action :set_list, only: %i[ show edit update destroy ]
 
   # GET /lists or /lists.json
   def index
-    # @lists = List.all.order(created_at: :desc)
-    @lists = List.search(params[:search]).order(created_at: :desc)
-    @list = List.new
-    # @category = Category.new
-    # 1.times { @list.categories.build }
+    @recent_lists = List.all.order(created_at: :desc)
+    # @popular_lists = 
   end
 
   # GET /lists/1 or /lists/1.json
   def show
+    # conn = ActionCable.server.connections.first { |c| c.current_user == user_id }
+    # @num_viewers = conn.count_unique_connections(params[:id])
   end
 
   # # GET /lists/new
-  # def new
-  #   @list = List.new
-  # end
+  def new
+    @list = List.new
+  end
 
   # # GET /lists/1/edit
   # def edit
@@ -38,6 +39,7 @@ class ListsController < ApplicationController
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /lists/1 or /lists/1.json
@@ -60,6 +62,7 @@ class ListsController < ApplicationController
       format.html { redirect_to lists_url, notice: "List was successfully destroyed." }
       format.json { head :no_content }
     end
+
   end
 
   def create_copy_text
