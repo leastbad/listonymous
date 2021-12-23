@@ -1,7 +1,7 @@
 class ListChannel < ApplicationCable::Channel
   def subscribed
     stream_from "list_channel_#{params[:list_id]}"
-    byebug
+    # byebug
     ActionCable.server.broadcast("list_channel_#{params[:list_id]}", counter: count_unique_connections(params[:list_id]) )
   end
 
